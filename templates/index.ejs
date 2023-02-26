@@ -1,0 +1,62 @@
+<html>
+<head>
+    <title>Students List (<%= isCached ? "Cached" : "No cached"%>)</title>
+    <style>
+        table {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+<h1 id="loadTimeEl">Load time: </h1>
+<h1>Students List (<%= isCached ? "Cached" : "No cached"%>)</h1>
+<table>
+    <thead>
+    <tr>
+        <th>№ п/п</th>
+        <th>Військове звання</th>
+        <th>Прізвище</th>
+        <th>Ім'я</th>
+        <th>По батькові</th>
+        <th>Рік народження</th>
+        <th>Адреса проживання</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for (let i = 0; i < students.length; i++) { %>
+        <tr>
+            <td><%= i + 1 %></td>
+            <td><%= students[i].rank %></td>
+            <td><%= students[i].last_name %></td>
+            <td><%= students[i].first_name %></td>
+            <td><%= students[i].middle_name %></td>
+            <td><%= students[i].birth_year %></td>
+            <td><%= students[i].address %></td>
+        </tr>
+    <% } %>
+    </tbody>
+</table>
+<script>
+    const loadTimeEl = document.getElementById("loadTimeEl")
+    window.onload = function () {
+        const loadTime = window.performance.timing.domContentLoadedEventEnd-window.performance.timing.navigationStart;
+        loadTimeEl.innerHTML = `Load time of the page is ${loadTime} ms`
+    }
+</script>
+</body>
+</html>
